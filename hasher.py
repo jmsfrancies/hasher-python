@@ -1,6 +1,6 @@
 # The start of a simple python program that hashes the user input for favorite color
 # import the python string  module
-import string
+import string        
 
 # hasher table function that inherits the favorite_color_list
 def hasher_table(favorite_color_list):
@@ -18,7 +18,6 @@ def hasher_table(favorite_color_list):
     # printed value of favorite_color_to_password for the user to see.
     print(favorite_color_to_password)
 
-
 # Main function that stores the required user input variable, favorite_color_list, and both function calls
 def main():
     # User input required on favorite color
@@ -32,6 +31,9 @@ def main():
         # the iterators value i is converted to an ordinal value and appended to the favorite color list.
         favorite_color_list.append(ord(i))
     
+    
+    # Print Favorite Color List
+    print("Ordinal Values for your favorite color are: {0}".format(favorite_color_list))
     # hasher table function that inherits the favorite_color_list            
     hasher_table(favorite_color_list)
     
