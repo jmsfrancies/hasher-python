@@ -1,40 +1,21 @@
-# The start of a simple python program that hashes the user input for favorite color
-# import the python string  module
-import string        
+import hashlib
 
-# hasher table function that inherits the favorite_color_list
-def hasher_table(favorite_color_list):
-    # variable that will be used to store the hashed word
-    favorite_color_to_password = ""
-    # iterator that goes through each letter
-    for i in favorite_color_list:
-        # Basic algorithm that is the key to finding the proper character within the string module printable characters feature 
-        i = int((i/4)*2)
-        # variable j is equivalent to the location of the integer i within the string.printable list
-        j = string.printable[i]
-        # Incrementor for the favorite_color_to_password empty string
-        favorite_color_to_password = favorite_color_to_password + j
+def get_password(user_name,password):
+    hasher_1 = hashlib.sha1()
+    hasher_2 = hashlib.sha1()
+    hasher_1.update(user_name)
+    hasher_2.update(password)
+    hasher_1.digest()
+    hasher_2.digest()
+    print("hashed username: {0}\nhashed password: {1}".format(hasher_1.hexdigest(),hasher_2.hexdigest()))
     
-    # printed value of favorite_color_to_password for the user to see.
-    print(favorite_color_to_password)
-
-# Main function that stores the required user input variable, favorite_color_list, and both function calls
+    
 def main():
-    # User input required on favorite color
-    favorite_color = str(input("What is your favorite color? "))
-    # print the favorite color for testing purposes
-    print(favorite_color)
-    # empty list for the favorite color's letters
-    favorite_color_list = []
-    # for loop that goes through each individual letter
-    for i in favorite_color:
-        # the iterators value i is converted to an ordinal value and appended to the favorite color list.
-        favorite_color_list.append(ord(i))
-    
-    
-    # Print Favorite Color List
-    print("Ordinal Values for your favorite color are: {0}".format(favorite_color_list))
-    # hasher table function that inherits the favorite_color_list            
-    hasher_table(favorite_color_list)
-    
+    user_name = str(input("Please enter your preferred username: "))
+    password = str(input("Please enter your password (Must be between eight to fifteen characters): "))
+    if len(password) >= 8 and len(password) <= 15:
+        get_password(user_name.encode('utf-8'),password.encode('utf-8'))
+        print("%s \n%s"%(user_name,password))
+    else:
+        print("Please enter a different password that fulfills the condition of eight to fifteen characters:")
 main()
