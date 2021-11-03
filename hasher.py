@@ -1,21 +1,16 @@
 import hashlib
-
-def hash_username_and_password(user_name,password):
-    hasher_1 = hashlib.sha1()
-    hasher_2 = hashlib.sha1()
-    hasher_1.update(user_name)
-    hasher_2.update(password)
-    hasher_1.digest()
-    hasher_2.digest()
-    print("hashed username: {0}\nhashed password: {1}".format(hasher_1.hexdigest(),hasher_2.hexdigest()))
     
     
 def main():
-    user_name = str(input("Please enter your preferred username: "))
-    password = str(input("Please enter your password (Must be between eight to fifteen characters): "))
-    if len(password) >= 8 and len(password) <= 15:
-        hash_username_and_password(user_name.encode('utf-8'),password.encode('utf-8'))
-        print("%s \n%s"%(user_name,password))
-    else:
-        print("Please enter a different password that fulfills the condition of eight to fifteen characters:")
+    words_to_add = int(input("How many words would you like to add to the word-lists: "))
+    f = open('word-list.txt','a')
+    for i in range(words_to_add):
+        add_word = str(input("Add a word: ")).encode('UTF-8')
+        f.write('{}'.format(add_word))
+        hasher = hashlib.sha512()
+        hasher.update(add_word)
+        f.write('\n{}\n'.format(hasher.digest()))
+        
+    f.close()
+                
 main()
